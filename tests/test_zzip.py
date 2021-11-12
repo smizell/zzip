@@ -104,11 +104,11 @@ def test_nested():
     assert z.current == {"a": {"b": 1, "c": [4, 5, 6]}}
 
 
-# def test_multiple_replace():
-#     z = zipper({"a": {"b": 1, "c": [4, 5, 6]}})
-#     assert z.down().down().replace(100, persist=True).right().down().replace(
-#         400
-#     ).top().current == {"a": {"b": 100, "c": [400, 5, 6]}}
+def test_multiple_replace():
+    z = zipper({"a": {"b": 1, "c": [4, 5, 6]}})
+    assert z.down().down().replace(100, persist=True).right().down().replace(
+        400
+    ).top().current == {"a": {"b": 100, "c": [400, 5, 6]}}
 
 
 def test_selector():

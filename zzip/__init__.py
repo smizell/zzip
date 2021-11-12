@@ -147,7 +147,10 @@ class Location:
 
     def replace(self, value, persist=False):
         if self.path:
-            return replace(self, current=value, path=replace(self.path, changed=True))
+            node = replace(self, current=value, path=replace(self.path, changed=True))
+            if persist:
+                return node.top().select(node.path.selector)
+            return node
         return replace(self, current=value)
 
     def select(self, selector):
