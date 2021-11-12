@@ -1,0 +1,17 @@
+[tool.poetry]
+authors = ["Stephen Mizell <smizell@gmail.com>"]
+description = ""
+name = "zzip"
+version = "0.0.1"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+black = "^21.10b0"
+pytest = "^5.2"
+pytest-snapshot = "^0.7.0"
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]
