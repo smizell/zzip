@@ -1,4 +1,5 @@
-from zzip import zipper
+import pytest
+from zzip import zipper, NavigationException
 
 
 def test_list_down():
@@ -105,6 +106,7 @@ def test_nested():
 
 
 def test_multiple_replace():
+    # We have to persist the value by going back to the top then selecting the node again
     z = zipper({"a": {"b": 1, "c": [4, 5, 6]}})
     assert z.down().down().replace(100, persist=True).right().down().replace(
         400
@@ -122,3 +124,15 @@ def test_update():
     z = zipper({"a": {"b": 1, "c": [4, 5, 6]}})
     zv = z.select(["a", "c", 1]).update(lambda loc: loc.current * 10)
     assert zv.top().current == {"a": {"b": 1, "c": [4, 50, 6]}}
+
+
+def test_direction_exceptions():
+    z = zipper([1, 2])
+    with pytest.raises(NavigationException):
+        z.down().down()
+    with pytest.raises(NavigationException):
+        z.up()
+    with pytest.raises(NavigationException):
+        z.left()
+    with pytest.raises(NavigationException):
+        z.right()

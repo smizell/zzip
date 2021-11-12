@@ -4,6 +4,18 @@ from typing import Any, List, Optional, Tuple
 __version__ = "0.0.1"
 
 
+class NavigationException(Exception):
+    def __init__(self, node, direction=None):
+        self.node = node
+        self.direction = direction
+        self.message = (
+            f"Cannot go {self.direction} here"
+            if self.direction
+            else "That navigation is not allowed"
+        )
+        super().__init__(self.message)
+
+
 @dataclass
 class Path:
     left: Tuple
@@ -102,6 +114,7 @@ class Location:
                 changed=False,
             )
             return replace(self, current=self.current[current_key], path=path)
+        raise NavigationException(self, "down")
 
     def up(self):
         if self.path:
@@ -115,7 +128,7 @@ class Location:
                         and self.path.parent_path.mark_changed(),
                     )
                 return replace(self, current=parent_node, path=self.path.parent_path)
-        # todo: elses
+        raise NavigationException(self, "up")
 
     def right(self):
         # todo: fail when no right
@@ -128,6 +141,7 @@ class Location:
             left = (*self.path.left, self.current)
             path = replace(self.path, index=len(left), left=left, right=right)
             return replace(self, current=current, path=path)
+        raise NavigationException(self, "right")
 
     def left(self):
         if self.path and self.path.left:
@@ -138,6 +152,7 @@ class Location:
             current, left = self.path.left[-1], self.path.left[:-1]
             path = replace(self.path, left=left, right=(self.current, *self.path.right))
             return replace(self, current=current, path=path)
+        raise NavigationException(self, "left")
 
     def top(self):
         loc = self
