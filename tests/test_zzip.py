@@ -116,3 +116,9 @@ def test_selector():
     zv = z.select(["a", "c", 1])
     assert zv.current == 5
     assert zv.path.selector == ("a", "c", 1)
+
+
+def test_update():
+    z = zipper({"a": {"b": 1, "c": [4, 5, 6]}})
+    zv = z.select(["a", "c", 1]).update(lambda loc: loc.current * 10)
+    assert zv.top().current == {"a": {"b": 1, "c": [4, 50, 6]}}

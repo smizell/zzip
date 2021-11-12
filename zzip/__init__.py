@@ -153,6 +153,14 @@ class Location:
             return node
         return replace(self, current=value)
 
+    def update(self, fn):
+        if self.path:
+            return replace(
+                self, current=fn(self), path=replace(self.path, changed=True)
+            )
+        else:
+            return replace(self, current=fn(self))
+
     def select(self, selector):
         loc = self
         for s in selector:
