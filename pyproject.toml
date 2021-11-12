@@ -11,6 +11,7 @@ python = "^3.9"
 black = "^21.10b0"
 pytest = "^5.2"
 pytest-snapshot = "^0.7.0"
+ipython = "^7.29.0"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"

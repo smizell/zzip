@@ -136,3 +136,17 @@ def test_direction_exceptions():
         z.left()
     with pytest.raises(NavigationException):
         z.right()
+
+
+def test_walk():
+    z = zipper({"a": {"b": 1, "c": [4, 5, 6]}})
+    vs = [v.current for v in z.walk()]
+    assert vs == [
+        {"a": {"b": 1, "c": [4, 5, 6]}},
+        {"b": 1, "c": [4, 5, 6]},
+        1,
+        [4, 5, 6],
+        4,
+        5,
+        6,
+    ]

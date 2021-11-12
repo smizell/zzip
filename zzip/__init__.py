@@ -182,6 +182,24 @@ class Location:
             loc = loc.down(s)
         return loc
 
+    def walk(self):
+        yield self
+
+        try:
+            d = self.down()
+        except NavigationException:
+            return
+
+        yield from d.walk()
+
+        try:
+            node = d.right()
+            while True:
+                yield from node.walk()
+                node = node.right()
+        except NavigationException:
+            return
+
 
 def zipper(value):
     return Location(current=value)
