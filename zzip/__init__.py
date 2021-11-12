@@ -131,7 +131,6 @@ class Location:
         raise NavigationException(self, "up")
 
     def right(self):
-        # todo: fail when no right
         if self.path and self.path.right:
             # todo: make work with ListPath, too
             if isinstance(self.path, DictPath):

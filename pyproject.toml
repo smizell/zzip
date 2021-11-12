@@ -1,6 +1,6 @@
 [tool.poetry]
 authors = ["Stephen Mizell <smizell@gmail.com>"]
-description = ""
+description = "Zipper tool for interacting with data"
 name = "zzip"
 version = "0.0.1"
 
@@ -9,9 +9,9 @@ python = "^3.9"
 
 [tool.poetry.dev-dependencies]
 black = "^21.10b0"
+ipython = "^7.29.0"
 pytest = "^5.2"
 pytest-snapshot = "^0.7.0"
-ipython = "^7.29.0"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
