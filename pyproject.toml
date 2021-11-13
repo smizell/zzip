@@ -2,7 +2,7 @@
 authors = ["Stephen Mizell <smizell@gmail.com>"]
 description = "Zipper tool for interacting with data"
 name = "zzip"
-version = "0.0.1"
+version = "0.0.2"
 
 [tool.poetry.dependencies]
 python = "^3.9"
